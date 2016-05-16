@@ -15,9 +15,9 @@ public class ParkhausMain {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Parkhaus ringCenter = new Parkhaus(2, "Ring Center");
+        Parkhaus ringCenter = new Parkhaus(5, "Ring Center");
         System.out.println(ringCenter.getName()+" hat freie Plaetze von : "+ringCenter.getFreiPlatz());
-        for(int i = 0; i < 3; i++) {
+        for(int i = 0; i < 10; i++) {
             Auto car = new Auto(ringCenter);
             car.start();
         }

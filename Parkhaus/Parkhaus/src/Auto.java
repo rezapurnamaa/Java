@@ -1,6 +1,6 @@
 
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -45,11 +45,11 @@ public final class Auto extends Thread{
     
     /**
      * Erstelle ein Auto
-     * @param parkhaus wo das Auto einparken will.
+     * @param parkhaus wo das Auto einparken kann.
      */
     public Auto(Parkhaus parkhaus){
         setParkhaus(parkhaus);
-        setAbfahren(1000);
+        setAbfahren(0);
         setParken(2000);
         setNummerschild(getRandom(1000, 9999));
         getInfoAuto();
@@ -68,7 +68,7 @@ public final class Auto extends Thread{
      * @param autoNummerschild the autoNummerschild to set
      */
     public final void setNummerschild(int autoNummerschild) {
-        this.nummerschild ="B-"+ Integer.toString(autoNummerschild);
+        this.nummerschild ="B-"+ Integer.toString(autoNummerschild) + " " + counter;
 
     }
     
@@ -110,36 +110,42 @@ public final class Auto extends Thread{
      * liefere Info über neues erstelltes Auto
      */
     private void getInfoAuto(){
-        System.out.println("Neues Auto. Nummerschild: " + nummerschild + " Kennzeichnung: " + counter);
+        System.out.println("Neues Auto. Nummerschild: " + nummerschild );
         
     }
     
     /**
-     * ein Auto fährt ein
+     * ein Auto fährt ein. Wenn Parkhaus voll ist, wartet Auto auf das abdere,
+     * bis ein anderes ausfährt
      * @return boolean
      */
     public boolean eingefahrenParkhaus(){
         boolean eingefahren = false;
+    
         synchronized(parkhaus){
-            if(parkhaus.getFreiPlatz() > 0){
-                parkhaus.einfahrtAuto(this);
-                System.out.println("Eingefahren: " + nummerschild);
-                eingefahren = true;
+            while(parkhaus.getFreiPlatz() == 0){
+                System.out.println("Parkhaus ist voll. " + nummerschild + " wartet.");
+                try {            
+                    parkhaus.wait();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Auto.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            else{
-                System.out.println("Parkhaus ist voll. " + nummerschild + " fährt woanderes.");
-            }
+            parkhaus.einfahrtAuto(this);
+            //System.out.println("Eingefahren: " + nummerschild);
+            eingefahren = true;
         }
         return eingefahren;
     }
     
     /**
-     * Auto fährt aus.
+     * Auto fährt aus und informiert das andere.
      */
     public void rausfahrenParkhaus(){
         synchronized(parkhaus){
             parkhaus.ausfahrtAuto(this);
             System.out.println("Ausgefahren: " + nummerschild);
+            parkhaus.notifyAll();
         }
     }
     
