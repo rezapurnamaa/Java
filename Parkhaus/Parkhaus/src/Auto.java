@@ -110,12 +110,13 @@ public final class Auto extends Thread{
      * liefere Info über neues erstelltes Auto
      */
     private void getInfoAuto(){
-        System.out.println("Neues Auto. Nummerschild: " + nummerschild );
         
+        System.out.println("Neues Auto. Nummerschild: " + nummerschild );
+        System.out.println(this);
     }
     
     /**
-     * ein Auto fährt ein. Wenn Parkhaus voll ist, wartet Auto auf das abdere,
+     * ein Auto fährt ein. Wenn Parkhaus voll ist, wartet Auto auf das andere,
      * bis ein anderes ausfährt
      * @return boolean
      */
@@ -125,12 +126,12 @@ public final class Auto extends Thread{
         synchronized(parkhaus){
             while(parkhaus.getFreiPlatz() == 0){
                 System.out.println("Parkhaus ist voll. " + nummerschild + " wartet.");
-                try {            
-                    parkhaus.wait();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Auto.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                parkhaus.addToQueue(this);
             }
+            parkhaus.removeFromQueue();
+            
+            
+            
             parkhaus.einfahrtAuto(this);
             //System.out.println("Eingefahren: " + nummerschild);
             eingefahren = true;
@@ -145,7 +146,7 @@ public final class Auto extends Thread{
         synchronized(parkhaus){
             parkhaus.ausfahrtAuto(this);
             System.out.println("Ausgefahren: " + nummerschild);
-            parkhaus.notifyAll();
+            parkhaus.notify();
         }
     }
     

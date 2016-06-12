@@ -1,3 +1,9 @@
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -21,6 +27,11 @@ public final class Parkhaus {
      * Name des Parkhauses
      */
     private String name;
+    
+    /**
+     * Warteschlange
+     */
+    private static Queue queue;
 
     /**
      * erzeuge Parkhaus mit anzahl Platz und Name
@@ -31,6 +42,7 @@ public final class Parkhaus {
         setGesamtPlatz(derFreiPlatz);
         setFreiPlatz(derFreiPlatz);
         setName(dieName);
+        queue = new LinkedList();
     }
     /**
      * liefere den Azahl von freien Plaetze
@@ -104,5 +116,41 @@ public final class Parkhaus {
      */
     public void setGesamtPlatz(int gesamtPlatz) {
         this.gesamtPlatz = gesamtPlatz;
+    }
+    
+    /**
+     * Auto In die Warteschlange hinzufügen
+     * @param auto Auto
+     */
+    public void addToQueue(Auto auto){
+        try {
+            queue.add(auto);
+            System.out.println(auto.getNummerschild() + " wartet auf die Schlange");
+            try {
+                wait();
+                //System.out.println(queue);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Parkhaus.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    /**
+     * Auto von der Schlange ziehen
+     */
+    public void removeFromQueue(){
+        if(!queue.isEmpty()){
+            Object peek = queue.peek();
+            System.out.println("queue : "+queue);
+            peek = queue.poll();
+            //System.out.println("top of queue : "+peek);
+        }
+        
+    }
+    
+    public void peekQueue(){
+        queue.peek();
     }
 }
