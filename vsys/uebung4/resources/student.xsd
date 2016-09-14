@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ 
+<xs:element name="Student">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="vorname"/>
+        <xs:element type="xs:string" name="nachname"/>
+        <xs:element name="wohnort">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="strasse"/>
+              <xs:element type="xs:string" name="hausnr"/>
+              <xs:element type="xs:string" name="plz"/>
+              <xs:element type="xs:string" name="stadt"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element type="xs:string" name="matrikelnummer"/>
+        <xs:element type="xs:string" name="studiengang"/>
+        <xs:element type="xs:int" name="fachsemester"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>			

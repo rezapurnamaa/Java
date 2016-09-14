@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Professor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="professor.xsd">
+    <vorname>Hans</vorname>
+    <nachname>Schlauberger</nachname>
+    <wohnort>
+        <strasse>Elfenbeinturm</strasse>
+        <hausnr>42</hausnr>
+        <plz>76543</plz>
+        <stadt>Wiesbaden</stadt>
+    </wohnort>
+    <geburtsdatum>1972-05-12</geburtsdatum>
+    <fachbereich>FB 4</fachbereich>
+    <personalnummer>999999</personalnummer>
+</Professor>

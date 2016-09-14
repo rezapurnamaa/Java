@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Student xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="student.xsd">
+    <vorname>Ilse</vorname>
+    <nachname>Bilse</nachname>
+    <wohnort>
+        <strasse>Im Wald</strasse>
+        <hausnr>12a</hausnr>
+        <plz>12345</plz>
+        <stadt>Berlin</stadt>
+    </wohnort>
+    <matrikelnummer>543210</matrikelnummer>
+    <studiengang>Angewandtes Computerspielen</studiengang>
+    <fachsemester>2</fachsemester>
+</Student>

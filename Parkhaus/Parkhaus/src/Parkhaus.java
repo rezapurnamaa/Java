@@ -125,7 +125,7 @@ public final class Parkhaus {
     public void addToQueue(Auto auto){
         try {
             queue.add(auto);
-            System.out.println(auto.getNummerschild() + " wartet auf die Schlange");
+            //System.out.println(auto.getNummerschild() + " wartet auf die Schlange");
             try {
                 wait();
                 //System.out.println(queue);
@@ -143,14 +143,11 @@ public final class Parkhaus {
     public void removeFromQueue(){
         if(!queue.isEmpty()){
             Object peek = queue.peek();
-            System.out.println("queue : "+queue);
+            //System.out.println("queue : "+queue);
             peek = queue.poll();
             //System.out.println("top of queue : "+peek);
         }
         
     }
     
-    public void peekQueue(){
-        queue.peek();
-    }
 }

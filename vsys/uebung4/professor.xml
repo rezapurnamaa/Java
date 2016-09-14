@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Professor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="professor.xsd">
+    <vorname>Prenzlauer</vorname>
+    <nachname>Berger</nachname>
+    <wohnort>
+        <strasse>Prenzlauer Allee</strasse>
+        <hausnr>22</hausnr>
+        <plz>10247</plz>
+        <stadt>Berlin</stadt>
+    </wohnort>
+    <geburtsdatum>1900-01-01</geburtsdatum>
+    <fachbereich>FB 4</fachbereich>
+    <personalnummer>123456</personalnummer>
+</Professor>

@@ -50,7 +50,7 @@ public final class Auto extends Thread{
     public Auto(Parkhaus parkhaus){
         setParkhaus(parkhaus);
         setAbfahren(0);
-        setParken(2000);
+        setParken(100);
         setNummerschild(getRandom(1000, 9999));
         getInfoAuto();
         counter++;
@@ -112,7 +112,7 @@ public final class Auto extends Thread{
     private void getInfoAuto(){
         
         System.out.println("Neues Auto. Nummerschild: " + nummerschild );
-        System.out.println(this);
+        //System.out.println(this);
     }
     
     /**
@@ -125,7 +125,7 @@ public final class Auto extends Thread{
     
         synchronized(parkhaus){
             while(parkhaus.getFreiPlatz() == 0){
-                System.out.println("Parkhaus ist voll. " + nummerschild + " wartet.");
+                System.out.println("Parkhaus ist voll. " + nummerschild + " wartet auf die Schlange.");
                 parkhaus.addToQueue(this);
             }
             parkhaus.removeFromQueue();
@@ -145,7 +145,7 @@ public final class Auto extends Thread{
     public void rausfahrenParkhaus(){
         synchronized(parkhaus){
             parkhaus.ausfahrtAuto(this);
-            System.out.println("Ausgefahren: " + nummerschild);
+            //System.out.println("Ausgefahren: " + nummerschild);
             parkhaus.notify();
         }
     }
@@ -172,7 +172,7 @@ public final class Auto extends Thread{
     
     @Override
     public void start(){
-        System.out.println(nummerschild + " fährt los.");
+        //System.out.println(nummerschild + " fährt los.");
         if (thread == null) {
             thread = new Thread (this, nummerschild);
             thread.start();
